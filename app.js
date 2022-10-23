@@ -1,6 +1,9 @@
 require('dotenv').config()
 const fs = require('node:fs');
 const path = require('node:path');
+const {
+    deployCommands
+} = require('./utils.js');
 
 const {
     Client,
@@ -9,8 +12,15 @@ const {
     Collection
 } = require('discord.js');
 
+const {
+    REST,
+    Routes
+} = require('discord.js');
+
+console.log("Starting MuteX & Discord client...");
+
 const client = new Client({
-    intents: [GatewayIntentBits.Guilds]
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates]
 });
 
 client.commands = new Collection();
@@ -29,7 +39,18 @@ for (const file of commandFiles) {
 }
 
 client.once(Events.ClientReady, () => {
-    console.log('Discord client is Ready!');
+    console.log('Discord client started successfully!');
+});
+
+client.on('guildCreate', async (guild) => {
+    const {
+        id,
+        name
+    } = guild;
+
+    console.log(`Joined and are deploying commands on guild ${name} : (${id})`);
+
+    await deployCommands(REST, Routes, fs, process.env.TOKEN, process.env.CLIENT_ID, id);
 });
 
 client.on(Events.InteractionCreate, async (interaction) => {
@@ -54,3 +75,5 @@ client.on(Events.InteractionCreate, async (interaction) => {
 });
 
 client.login(process.env.TOKEN);
+
+console.log("MuteX started successfully!");

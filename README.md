@@ -17,9 +17,13 @@ You can host MuteX instance in your local machine! But you'll need some experien
 ### 📦 Prerequisites
 
 Before starting, make sure you've met the following requirements:
+* Create an App on Discord Developers <a href="https://discord.com/developers/applications">here!</a>
 * Node.Js
 * Ngrok Account
 * Ngrok.exe Downloaded
+* (Optional) Enable Developer Mode on Discord: User Settings -> Advanced -> Developer Mode
+
+Obs.: The Developer Mode option will allow you to get IDs from users, text channels, voice channels, server, etc. It'll only help you on development and isn't mandatory.
 
 ### 💻 Installing MuteX:
 
@@ -37,6 +41,15 @@ cd MuteX
 ```
 npm install
 ```
+### ⚙️ Configuring .env
+All that information is found in your app settings.
+
+* CLIENT_ID - It's your... literally... Client ID...
+* TOKEN - It's your Client Secret
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/60880102/197380908-c28629b2-5386-42a7-9b56-75f78054c614.jpg" width="611" height="151">
+</p>
 
 ### ⚙️ Configuring Ngrok
 
@@ -47,7 +60,7 @@ ngrok.exe http 80
 ```
 This will start a connection that camouflage your localhost with a random-generated valid address. <br> <br>
 When you access that address, it'll redirect to your localhost:80 <br> <br>
-This is necessary 'cause Discord needs to comunicate with a host. <br> <br>
+This is necessary because Discord needs to comunicate with a host. <br> <br>
 In other words, what server Discord will call when someone uses your bot commands? It can't be your locahost, literally. But with ngrok, that valid address will redirect without any problems and will work! =D <br>
 
 ### ☕ Running MuteX

@@ -64,8 +64,11 @@ client.on(Events.InteractionCreate, async (interaction) => {
 });
 
 client.on("ready", () => {
-    console.log("Bot is ready!");
-    const guilds = client.guilds.cache.map(async guild => {
+    let count = client.guilds.cache.size
+
+    console.log(`Bot is in ${count} servers!`);
+
+    /*const guilds = client.guilds.cache.map(async guild => {
         return {
             id: guild.id,
             name: guild.name,
@@ -73,6 +76,7 @@ client.on("ready", () => {
             joinedAt: guild.joinedAt
         }
     });
+
 
     const data = {
         count: guilds.length,
@@ -85,15 +89,19 @@ client.on("ready", () => {
             return;
         }
         console.log("guilds.json has been created!");
-    });
+    });*/
 });
 
 client.on('guildCreate', async (guild) => {
-    const json = require('../guilds.json');
+    //const json = require('../guilds.json');
 
     console.log(`Joined guild and are deploying commands on: (id:${guild.id}) ${guild.name}`);
 
-    json.guilds.push({
+    let count = client.guilds.cache.size
+
+    console.log(`Bot is in ${count} servers!`);
+
+    /*json.guilds.push({
         id: guild.id,
         name: guild.name
     });
@@ -106,12 +114,12 @@ client.on('guildCreate', async (guild) => {
             return;
         }
         console.log("Guild created at guilds.json!");
-    });
+    });*/
 
     await deployCommands(REST, Routes, fs, process.env.TOKEN, process.env.CLIENT_ID, id);
 });
 
-client.on('guildUpdate', (oldGuild, newGuild) => {
+/*client.on('guildUpdate', (oldGuild, newGuild) => {
     if (oldGuild.name !== newGuild.name) {
         const json = require('../guilds.json');
 
@@ -127,14 +135,18 @@ client.on('guildUpdate', (oldGuild, newGuild) => {
             console.log(`The name of ${oldGuild.name} has been updated to ${newGuild.name} in the guilds.json file`);
         });
     }
-});
+});*/
 
 client.on("guildDelete", guild => {
-    const json = require('../guilds.json');
+    //const json = require('../guilds.json');
 
     console.log(`The bot has been removed from: (id:${guild.id}) ${guild.name}`);
 
-    const guilds = json.guilds.filter(g => g.id !== guild.id);
+    let count = client.guilds.cache.size
+
+    console.log(`Bot is in ${count} servers!`);
+
+    /*const guilds = json.guilds.filter(g => g.id !== guild.id);
 
     json.count = guilds.length;
     json.guilds = guilds;
@@ -145,9 +157,14 @@ client.on("guildDelete", guild => {
             return;
         }
         console.log("Guild deleted from guilds.json!");
-    });
+    });*/
 });
 
 client.login(process.env.TOKEN);
 
 console.log("MuteX started successfully!");
+
+setInterval(() => {
+    let count = client.guilds.cache.size
+    console.log(`Mutex Bot is in ${count} servers!`);
+}, 600000);

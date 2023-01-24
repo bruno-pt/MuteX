@@ -4,8 +4,8 @@
   "description": "A discord bot that mute/unmute all users in a voice channel.",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "concurrently \"nodemon app.js\""
+    "start": "node ./src/app.js",
+    "dev": "concurrently \"nodemon ./src/app.js\""
   },
   "author": "Bruno Peternella",
   "license": "ISC",

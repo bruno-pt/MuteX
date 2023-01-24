@@ -2,7 +2,9 @@ const {
 	SlashCommandBuilder
 } = require('discord.js');
 
-const { mute } = require('../utils');
+const {
+	mute
+} = require('../utils');
 
 module.exports = {
 	data: new SlashCommandBuilder()
